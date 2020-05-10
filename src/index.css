@@ -11,6 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 @media (min-width:1200px){
   .container{
    max-width:950px; 
@@ -29,4 +30,34 @@ code {
   justify-content: center;
   flex-direction: column;
   padding-top:25%;
+}
+
+.buttoncontainer{
+  display: flex;
+  flex: 2;
+  justify-content: space-around;
+}
+
+.resulttab {
+  padding-top:10%;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.bottombar {
+  margin-top: 30%;
+  bottom: 0;
+
+}
+/* 
+.bottombar .progress  .progress-bar div::before {
+  content: 'Size',
+
+} */
+
+.bottombar .progress {
+ height:2rem;
 }

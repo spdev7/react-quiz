@@ -3,12 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react'
 
 
-const BottomBar = {
-//   position: "fixed",
-   marginTop:190,
-   bottom: 0,
-}
-
 class AnswerProgressBar extends Component {
     constructor(props) {
         super(props);
@@ -20,8 +14,8 @@ class AnswerProgressBar extends Component {
     render() {
         console.log(this.props)
         return (
-            <div style={BottomBar}>
-                <ProgressBar now={this.props.correct} label={`${this.props.correct}%`} />
+            <div className="bottombar">
+                <ProgressBar now={this.props.correct} />
             </div>
         )
     }

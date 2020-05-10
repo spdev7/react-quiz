@@ -1,21 +1,18 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import AnswerProgressBar from "./AnswerProgressBar";
-const can = {
-  display:"flex",
-  flexDirection:"column"
-}
 
-const CorrectAndNextQuestion = (props) => {
+
+const ResultTab = (props) => {
   return (
-  <div style={can}>
-    <div>{props.answer == "danger" ? "Sorry!" : "Correct"}</div>
-    <div>
-    <Button variant={"dark"}>Next Question</Button>
+    <div className="resulttab">
+      <div>{props.answer == "danger" ? "Sorry!" : "Correct"}</div>
+      <div>
+        <Button variant={"dark"}>Next Question</Button>
+      </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
 export default class QuestionCard extends Component {
   constructor(props) {
@@ -38,11 +35,11 @@ export default class QuestionCard extends Component {
   };
 
   counted = (prevState) => {
-      console.log("ds")
-      this.setState(prevState => ({
-          correct:prevState.correct + 1
-      }));
-  }
+    console.log("ds");
+    this.setState((prevState) => ({
+      correct: prevState.correct + 1,
+    }));
+  };
   handleDown = (event) => {
     if (this.state.clicked === false) {
       this.setState({
@@ -53,7 +50,13 @@ export default class QuestionCard extends Component {
     }
   };
   render(props) {
-    const { question, correct_answer, incorrect_answers,toggle,updateToggle } = this.props;
+    const {
+      question,
+      correct_answer,
+      incorrect_answers,
+      toggle,
+      updateToggle,
+    } = this.props;
     return (
       <div className="questioncard">
         <div>
@@ -61,7 +64,7 @@ export default class QuestionCard extends Component {
             <h4>{decodeURIComponent(question)}</h4>
           </div>
         </div>
-        <div>
+        <div className="buttoncontainer">
           <div onClick={this.handleUp}>
             <Button
               variant={this.state.colorRight}
@@ -83,7 +86,9 @@ export default class QuestionCard extends Component {
             </div>
           ))}
         </div>
-        {this.state.clicked && <CorrectAndNextQuestion answer={this.state.colorWrong}/>}
+        {this.state.clicked && (
+          <ResultTab answer={this.state.colorWrong} />
+        )}
         <AnswerProgressBar correct={this.state.correct} />
         {/* {updateToggle()} */}
       </div>
