@@ -16,3 +16,17 @@ code {
    max-width:950px; 
   }
 }
+
+.questioncard {
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom:30%;
+}
+
+.questiontitle {
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top:25%;
+}
