@@ -10,34 +10,54 @@ export class QuestionHome extends Component {
       data: NewData,
       number_of_correct: "",
       number_of_incorrect: "",
-      toggle:true
+      toggle: true,
+      step: 1,
+      correct: 0,
     };
   }
 
   updateToggle = () => {
     this.setState({
-      toggle: !this.state.toggle
-    })
-  }
+      step: this.state.step + 1,
+    });
+  };
+
+  updateCorrectAnswers = (e) => {
+    e === "danger"
+      ? this.setState({
+          correct: this.state.correct,
+        })
+      : this.setState({
+          correct: this.state.correct + 1,
+        });
+  };
+
   render() {
+    const { step } = this.state;
     return (
       <div>
-        {this.state.data.map((ele) => ( this.state.toggle &&
-          <div key={ele.question}>
-            <QuestionHeading
-              id={ele.id}
-              category={ele.category}
-              difficulty={ele.difficulty}
-            />
-            <QuestionCard
-              question={ele.question}
-              correct_answer={ele.correct_answer}
-              incorrect_answers={ele.incorrect_answers}
-              toggle={this.state.toggle}
-              updateToggle={this.updateToggle}
-            />
-          </div>
-        ))}
+        {this.state.data.map((ele) => {
+          if (this.state.toggle && step == ele.id)
+            return (
+              <div key={ele.question}>
+                <QuestionHeading
+                  id={ele.id}
+                  category={ele.category}
+                  difficulty={ele.difficulty}
+                />
+                <QuestionCard
+                  question={ele.question}
+                  correct_answer={ele.correct_answer}
+                  incorrect_answers={ele.incorrect_answers}
+                  toggle={this.state.toggle}
+                  updateToggle={this.updateToggle}
+                  correct={this.state.correct}
+                  updateCorrectAnswers={this.updateCorrectAnswers}
+                  step={this.state.step}
+                />
+              </div>
+            );
+        })}
       </div>
     );
   }

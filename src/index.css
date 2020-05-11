@@ -34,8 +34,11 @@ code {
 
 .buttoncontainer{
   display: flex;
-  flex: 2;
-  justify-content: space-around;
+  flex-direction: column;
+}
+
+.buttondiv{
+  padding-bottom: 1rem;
 }
 
 .resulttab {
@@ -48,9 +51,10 @@ code {
 }
 
 .bottombar {
-  margin-top: 30%;
+  position: fixed;
   bottom: 0;
-
+  width:70%;
+  padding-right:0 !important;
 }
 /* 
 .bottombar .progress  .progress-bar div::before {
@@ -58,6 +62,11 @@ code {
 
 } */
 
-.bottombar .progress {
- height:2rem;
+.progress {
+  height:1.5rem !important;
 }
+
+.resultbarlabel{
+  display:flex;
+  justify-content: space-between;
+} 

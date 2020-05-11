@@ -2,13 +2,20 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import AnswerProgressBar from "./AnswerProgressBar";
 
-
 const ResultTab = (props) => {
   return (
     <div className="resulttab">
       <div>{props.answer == "danger" ? "Sorry!" : "Correct"}</div>
       <div>
-        <Button variant={"dark"}>Next Question</Button>
+        <Button
+          variant={"dark"}
+          onClick={() => {
+            props.updateCorrectAnswers(props.answer);
+            props.updateToggle();
+          }}
+        >
+          Next Question
+        </Button>
       </div>
     </div>
   );
@@ -21,7 +28,6 @@ export default class QuestionCard extends Component {
       colorRight: "outline-dark",
       colorWrong: "outline-dark",
       clicked: false,
-      correct: 0,
     };
   }
 
@@ -34,12 +40,6 @@ export default class QuestionCard extends Component {
     }
   };
 
-  counted = (prevState) => {
-    console.log("ds");
-    this.setState((prevState) => ({
-      correct: prevState.correct + 1,
-    }));
-  };
   handleDown = (event) => {
     if (this.state.clicked === false) {
       this.setState({
@@ -56,6 +56,9 @@ export default class QuestionCard extends Component {
       incorrect_answers,
       toggle,
       updateToggle,
+      correct,
+      updateCorrectAnswers,
+      step,
     } = this.props;
     return (
       <div className="questioncard">
@@ -65,7 +68,7 @@ export default class QuestionCard extends Component {
           </div>
         </div>
         <div className="buttoncontainer">
-          <div onClick={this.handleUp}>
+          <div className="buttondiv" onClick={this.handleUp}>
             <Button
               variant={this.state.colorRight}
               onClick={this.counted}
@@ -75,7 +78,7 @@ export default class QuestionCard extends Component {
             </Button>
           </div>
           {incorrect_answers.map((e) => (
-            <div>
+            <div className="buttondiv">
               <Button
                 variant={this.state.colorWrong}
                 onClick={this.handleDown}
@@ -87,10 +90,13 @@ export default class QuestionCard extends Component {
           ))}
         </div>
         {this.state.clicked && (
-          <ResultTab answer={this.state.colorWrong} />
+          <ResultTab
+            answer={this.state.colorWrong}
+            updateToggle={updateToggle}
+            updateCorrectAnswers={updateCorrectAnswers}
+          />
         )}
-        <AnswerProgressBar correct={this.state.correct} />
-        {/* {updateToggle()} */}
+        <AnswerProgressBar correct={correct} step={step} answer={this.state.colorWrong}/>
       </div>
     );
   }
